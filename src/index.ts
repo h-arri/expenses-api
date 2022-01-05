@@ -1,9 +1,18 @@
 import express from 'express'
+import mongoose from 'mongoose'
 import { json } from 'body-parser'
+import { expensesRouter } from './routes/expense'
 
 const app = express()
-app.use(json())
+const port = process.env.PORT || 3000
 
-app.listen(3000, () => {
-    console.log('server is listening on port 3000')
+app.use(json())
+app.use(expensesRouter)
+
+mongoose.connect('mongodb://localhost:27017/expenses', () => {
+    console.log('Connected to database')
+})
+
+app.listen(port, () => {
+    console.log('server is listening on port ', port)
 })

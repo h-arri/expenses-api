@@ -3,6 +3,7 @@
 Node.js API to create, view, edit, delete and list all your daily expenses.
 
 ## Tech-stack
+-   TypeScript
 -   Node.js
 -   Express
 -   MongoDB

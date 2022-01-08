@@ -1,4 +1,4 @@
-import express from "express";
+import express, { Request, Response } from "express";
 import { json, urlencoded } from "body-parser";
 import { expensesRouter } from "./routes/expense";
 
@@ -10,6 +10,11 @@ const DB_NAME = "expenses";
 
 app.use(json());
 app.use(urlencoded({ extended: false }));
+
+app.get('/', (req: Request, res: Response) => {
+  res.json({ message: 'Success!' })
+})
+
 app.use("/api/expenses/", expensesRouter);
 
 db.mongoose

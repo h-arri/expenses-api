@@ -40,7 +40,6 @@ const expenseSchema = new mongoose.Schema(
 );
 
 expenseSchema.statics.build = (attr: IExpense) => {
-  console.log("attr ", attr);
   return new Expense(attr);
 };
 

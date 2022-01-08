@@ -1,22 +1,19 @@
-import express, { Request, Response } from 'express'
-import { Expense } from '../models/expense'
+import express, { Request, Response } from "express";
 
-const router = express.Router()
+const Expense = require("../models/expense");
 
-router.get('/api/expenses', async (req: Request, res: Response) => {
-    const expenses = await Expense.find({})
+const ExpenseController = require("../controllers/expense");
 
-    return res.status(200).send(expenses)
-})
+const router = express.Router();
 
-router.post('/api/expenses/create', async (req: Request, res: Response) => {
-    console.log('req ', req.body)
-    const { name, description, when, paymentType } = req.body
+router.post("/create", ExpenseController.create);
 
-    const expense = Expense.build({ name, description, when, paymentType })
-    await expense.save()
+router.get("/", ExpenseController.findAll);
 
-    return res.status(201).send(expense)
-})
+router.get("/:id", ExpenseController.findOne);
 
-export { router as expensesRouter }
+router.put("/:id", ExpenseController.update);
+
+router.delete("/:id", ExpenseController.delete);
+
+export { router as expensesRouter };

@@ -1,46 +1,52 @@
-import mongoose from 'mongoose'
+import mongoose from "mongoose";
 
 interface IExpense {
-    name: string
-    description?: string
-    when: number
-    paymentType: 'CASH' | 'CREDIT_CARD' | 'DEBIT_CARD'
+  name: string;
+  description?: string;
+  when: number;
+  paymentType: "CASH" | "CREDIT_CARD" | "DEBIT_CARD";
 }
 
 interface ExpenseDocument extends mongoose.Document {
-    name: string
-    description?: string
-    when: number
-    paymentType: 'CASH' | 'CREDIT_CARD' | 'DEBIT_CARD'
+  name: string;
+  description?: string;
+  when: number;
+  paymentType: "CASH" | "CREDIT_CARD" | "DEBIT_CARD";
 }
 
 interface ExpenseModelInterface extends mongoose.Model<ExpenseDocument> {
-    build(attr: IExpense): ExpenseDocument
+  build(attr: IExpense): ExpenseDocument;
 }
 
-const expenseSchema = new mongoose.Schema({
+const expenseSchema = new mongoose.Schema(
+  {
     name: {
-        type: String,
-        required: true
+      type: String,
+      required: true,
     },
     description: {
-        type: String
+      type: String,
     },
     when: {
-        type: Number,
-        required: true
+      type: Number,
+      required: true,
     },
     paymentType: {
-        type: String,
-        required: true
-    }
-})
+      type: String,
+      required: true,
+    },
+  },
+  { timestamps: true }
+);
 
 expenseSchema.statics.build = (attr: IExpense) => {
-    console.log('attr ', attr)
-    return new Expense(attr)
-}
+  console.log("attr ", attr);
+  return new Expense(attr);
+};
 
-const Expense = mongoose.model<ExpenseDocument, ExpenseModelInterface>('Expense', expenseSchema)
+const Expense = mongoose.model<ExpenseDocument, ExpenseModelInterface>(
+  "Expense",
+  expenseSchema
+);
 
-export { Expense }
+module.exports = Expense;

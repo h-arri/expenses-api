@@ -18,7 +18,7 @@ interface ExpenseModelInterface extends mongoose.Model<ExpenseDocument> {
   build(attr: IExpense): ExpenseDocument;
 }
 
-const expenseSchema = new mongoose.Schema(
+const ExpenseSchema = new mongoose.Schema(
   {
     name: {
       type: String,
@@ -39,13 +39,20 @@ const expenseSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-expenseSchema.statics.build = (attr: IExpense) => {
+ExpenseSchema.statics.build = (attr: IExpense) => {
   return new Expense(attr);
+};
+
+ExpenseSchema.methods.toJSON = function () {
+  const expense = this;
+  const { __v, _id, ...object } = expense.toObject();
+  object.id = _id;
+  return object;
 };
 
 const Expense = mongoose.model<ExpenseDocument, ExpenseModelInterface>(
   "Expense",
-  expenseSchema
+  ExpenseSchema
 );
 
 module.exports = Expense;

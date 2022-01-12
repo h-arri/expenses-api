@@ -3,6 +3,7 @@
 Node.js API to create, view, edit, delete and list all your daily expenses.
 
 ## Tech-stack
+
 -   TypeScript
 -   Node.js
 -   Express
@@ -15,7 +16,3 @@ Node.js API to create, view, edit, delete and list all your daily expenses.
 -   Spin up `mongodb` server locally.
 -   Run `npm start` to start the application, and it will be available on [http://localhost:3000](http://localhost:4000).
 -   Use `postman` to create, view, edit, delete and list all expenses.
-
-
-
-

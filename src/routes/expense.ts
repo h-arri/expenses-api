@@ -1,19 +1,19 @@
-import express, { Request, Response } from "express";
+import express, { Request, Response } from 'express'
 
-const Expense = require("../models/expense");
+const Expense = require('../models/expense')
 
-const ExpenseController = require("../controllers/expense");
+const ExpenseController = require('../controllers/expense')
 
-const router = express.Router();
+const router = express.Router()
 
-router.post("/create", ExpenseController.create);
+router.post('/create', ExpenseController.create)
 
-router.get("/", ExpenseController.findAll);
+router.get('/', ExpenseController.findAll)
 
-router.get("/:id", ExpenseController.findOne);
+router.get('/:id', ExpenseController.findOne)
 
-router.put("/:id", ExpenseController.update);
+router.put('/:id', ExpenseController.update)
 
-router.delete("/:id", ExpenseController.delete);
+router.delete('/:id', ExpenseController.delete)
 
-export { router as expensesRouter };
+export { router as expensesRouter }

@@ -20,8 +20,8 @@ interface ExpenseModelInterface extends mongoose.Model<ExpenseDocument> {
 
 const ExpenseSchema = new mongoose.Schema(
     {
-        name: {
-            type: String,
+        price: {
+            type: Number,
             required: true,
         },
         description: {

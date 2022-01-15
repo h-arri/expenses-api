@@ -8,8 +8,8 @@ const db = require('../models')
 const Expense = db.expense
 
 exports.create = (req: Request, res: Response) => {
-    const { name, description, when, paymentType } = req.body
-    const expense = db.expense.build({ name, description, when, paymentType })
+    const { price, description, when, paymentType } = req.body
+    const expense = db.expense.build({ price, description, when, paymentType })
 
     expense
         .save()
@@ -22,8 +22,8 @@ exports.create = (req: Request, res: Response) => {
 }
 
 exports.findAll = (req: Request, res: Response) => {
-    const { name } = req.body
-    const condition = name ? { name: { $regex: new RegExp(name), $options: 'i' } } : {}
+    const { when } = req.body
+    const condition = when ? { when: { $regex: new RegExp(when), $options: 'i' } } : {}
 
     Expense.find(condition)
         .then((data: any) => res.status(200).send(data))
@@ -62,9 +62,9 @@ exports.update = (req: Request, res: Response) => {
     }
 
     const { id } = req.params
-    const { name, description, when, paymentType } = req.body
+    const { price, description, when, paymentType } = req.body
 
-    const expense = Expense.build({ name, description, when, paymentType })
+    const expense = Expense.build({ price, description, when, paymentType })
 
     Expense.findByIdAndUpdate(id, expense, { useFindAndUpdate: false })
         .then((data: any) => {
